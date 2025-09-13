@@ -63,3 +63,11 @@ MIT License
 👨‍💻 Author
 Yousef Shaker
 GitHub: @yuozarseiph
+
+## Screenshots
+
+### Login Form
+![Login Form](assets/login.png)
+
+### Signup Form
+![Signup Form](assets/signup.png)
