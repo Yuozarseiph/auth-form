@@ -31,7 +31,6 @@ const LoginSignup = () => {
   const [errors, setErrors] = useState({});
   const [notifications, setNotifications] = useState([]);
 
-  // Toggle dark mode
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -40,23 +39,19 @@ const LoginSignup = () => {
     }
   }, [darkMode]);
 
-  // Add notification
   const addNotification = (message, type = "error") => {
     const id = Date.now();
     setNotifications((prev) => [...prev, { id, message, type }]);
 
-    // Auto remove after 5 seconds
     setTimeout(() => {
       setNotifications((prev) => prev.filter((notif) => notif.id !== id));
     }, 5000);
   };
 
-  // Remove notification
   const removeNotification = (id) => {
     setNotifications((prev) => prev.filter((notif) => notif.id !== id));
   };
 
-  // Validate form
   const validateForm = () => {
     const newErrors = {};
 
@@ -84,7 +79,6 @@ const LoginSignup = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Clear error when user types
     if (errors[name]) {
       setErrors((prev) => {
         const newErrors = { ...prev };
@@ -98,7 +92,6 @@ const LoginSignup = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      // Add notifications for each error
       Object.values(errors).forEach((error) => {
         addNotification(error, "error");
       });
@@ -108,10 +101,7 @@ const LoginSignup = () => {
     setIsLoading(true);
 
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // Simulate random error for demo
       if (Math.random() > 0.7 && !isLogin) {
         throw new Error("Email already exists");
       }
@@ -119,8 +109,6 @@ const LoginSignup = () => {
       setIsLoading(false);
       setSuccess(true);
       setShowSuccess(true);
-
-      // Reset after success
       setTimeout(() => {
         setShowSuccess(false);
         setTimeout(() => {
@@ -159,7 +147,6 @@ const LoginSignup = () => {
           : "bg-gradient-to-br from-indigo-50 to-purple-100"
       }`}
     >
-      {/* Notifications Container */}
       <div className="fixed top-4 right-4 z-50 w-full max-w-xs space-y-3">
         <AnimatePresence>
           {notifications.map((notification) => (
@@ -189,8 +176,6 @@ const LoginSignup = () => {
           ))}
         </AnimatePresence>
       </div>
-
-      {/* Dark mode toggle */}
       <button
         onClick={() => setDarkMode(!darkMode)}
         className={`fixed top-6 right-6 p-3 rounded-full ${
@@ -229,7 +214,6 @@ const LoginSignup = () => {
                 }}
                 className="mx-auto mb-4 relative"
               >
-                {/* Glowing background effect */}
                 <div
                   className={`absolute -inset-2 rounded-full ${
                     darkMode
@@ -237,8 +221,6 @@ const LoginSignup = () => {
                       : "bg-gradient-to-r from-purple-400 to-indigo-400 blur-md opacity-50"
                   }`}
                 ></div>
-
-                {/* Main icon container */}
                 <div
                   className={`relative rounded-full p-4 ${
                     darkMode ? "bg-gray-800" : "bg-white"
@@ -260,8 +242,6 @@ const LoginSignup = () => {
                     />
                   )}
                 </div>
-
-                {/* Brand badge */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
@@ -275,8 +255,6 @@ const LoginSignup = () => {
                   YZ
                 </motion.div>
               </motion.div>
-
-              {/* Brand name below the icon */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
